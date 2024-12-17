@@ -30,7 +30,7 @@ class Main {
 
         // 최단 거리 결과 출력 (목적지 도달 거리)
         int result = map[x - 1][y - 1]; // 목적지 (x-1, y-1)
-        System.out.println(result > 0 ? result : -1); // 도달할 수 없으면 -1 출력
+        System.out.println(result);
     }
 
     static void BFS(int startX, int startY) {
@@ -60,7 +60,7 @@ class Main {
                     queue.add(new int[] {nextX, nextY});
                     visited[nextX][nextY] = true;
 
-                    // 최단 거리 갱신
+                    // 최단 거리 갱신.. 현재 좌표까지의 거리 갱신
                     map[nextX][nextY] = map[currentX][currentY] + 1;
                 }
             }
