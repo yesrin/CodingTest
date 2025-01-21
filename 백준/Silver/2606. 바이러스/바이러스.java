@@ -3,7 +3,7 @@ import java.util.*;
 public class Main {
     static ArrayList<ArrayList<Integer>> graph;
     static boolean[] visited;
-    static int count=0;
+    static int count = 0;
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
@@ -17,7 +17,7 @@ public class Main {
             graph.add(new ArrayList<>());
         }
 
-        // 연결되어 있는 그래프 입력 받기
+        // 연결된 그래프 입력 받기
         for (int i = 0; i < M; i++) {
             int x = input.nextInt();
             int y = input.nextInt();
@@ -25,25 +25,31 @@ public class Main {
             graph.get(y).add(x); // 양방향 그래프
         }
 
-        
-        visited = new boolean[N + 1]; 
+        visited = new boolean[N + 1];
 
-        // DFS 탐색 시작
-        dfs(1);
+        // BFS 탐색 시작
+        bfs(1);
 
         // 결과 출력
-        System.out.println(count-1);
+        System.out.println(count - 1);
     }
 
-    // DFS 탐색 메서드
-    public static void dfs(int start) {
-        visited[start] = true; // 현재 노드 방문 체크
-        count++;
+    // BFS 탐색 메서드
+    public static void bfs(int start) {
+        Queue<Integer> queue = new LinkedList<>();
+        queue.offer(start); // 시작 노드를 큐에 추가
+        visited[start] = true;
 
-        // 연결된 노드 탐색
-        for (int next : graph.get(start)) {
-            if (!visited[next]) { // 방문하지 않은 노드만 탐색
-                dfs(next); // 깊이 증가하며 탐색
+        while (!queue.isEmpty()) {
+            int current = queue.poll(); // 큐에서 하나의 노드를 꺼냄
+            count++;
+
+            // 현재 노드와 연결된 노드들을 확인
+            for (int next : graph.get(current)) {
+                if (!visited[next]) { // 방문하지 않은 노드라면
+                    visited[next] = true; // 방문 체크
+                    queue.offer(next); // 큐에 추가
+                }
             }
         }
     }
