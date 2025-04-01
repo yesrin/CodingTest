@@ -73,8 +73,9 @@ public class Main{
 		int startRow = rowPoint*3;
 		int startCol = colPoint*3;
 		
-		for(int x=0; x<3; x++){ //0,1,2
-			for(int y =0; y<3; y++){
+		for(int x=0; x<3; x++){
+				for(int y =0; y<3; y++){
+
 
 				if(map[startRow+x][startCol+y] == num){
 					 return false;
