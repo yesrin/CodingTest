@@ -1,22 +1,19 @@
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Arrays;
 
 class Solution {
-    public List<Integer> solution(int[] array, int[][] commands) {
-        List<Integer> answer = new ArrayList<>();
-        List<Integer> arrayList = Arrays.stream(array).boxed().collect(Collectors.toList());
+    public int[] solution(int[] array, int[][] commands) {
+        int[] answer = new int[commands.length];
 
-        for (int x = 0; x < commands.length; x++) {
-            int[] command = commands[x];
-            int i = command[0];
-            int j = command[1];
-            int k = command[2];
+        for (int idx = 0; idx < commands.length; idx++) {
+            int i = commands[idx][0];
+            int j = commands[idx][1];
+            int k = commands[idx][2];
 
-            List<Integer> range = new ArrayList<>(arrayList.subList(i - 1, j));
-            Collections.sort(range);
-            answer.add(range.get(k - 1));
+            int[] range = Arrays.copyOfRange(array, i - 1, j); // i부터 j까지 슬라이스
+            Arrays.sort(range);                                  // 정렬
+            answer[idx] = range[k - 1];                          // k번째
         }
-        
+
         return answer;
     }
 }
